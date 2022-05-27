@@ -29,8 +29,8 @@ class player:
 		#Enemy is dead
 		if enemy.hp <= 0:
 			enemy.hp = 0
-			cookiesGained = random.randint(1, 15) #Random amount of cookies rewarded
-			expGained = random.randint(1, 15) #Random amount of exp rewarded
+			cookiesGained = random.randint(5, 25) * self.lvl #Random amount of cookies rewarded
+			expGained = random.randint(5, 25) * self.lvl #Random amount of exp rewarded
 			self.cookies += cookiesGained
 			self.exp += expGained
 			print(f"{tab}{enemy.name} is dead!")
@@ -97,14 +97,14 @@ class enemy:
 
 		#Variables
 		self.name = random.choice(random.choice(possibleNames))
-		self.maxHP = random.randint(50, 150)
+		self.maxHP = int((random.randint(1, 75) / 100) * client.maxHP)
 		self.hp = self.maxHP
 		self.behavior = random.choices(behaviors, behaviorWeights)[0]
 	#Fight (attack the player)
 	def fight(self):
-		hit = random.randint(10, 15) #Amount of HP to take away
+		hit = int((random.randint(1, 25) / 100) * client.maxHP) #Amount of HP to take away
 		print(f"\n{self.name} attacks! -{hit} health")
-		client.hp -= 15
+		client.hp -= hit
 		#Player is dead
 		if client.hp <= 0:
 			client.hp = 0
@@ -213,6 +213,15 @@ class commands:
 				print(f"You ate {hpGained} cookies! +{hpGained} health")
 				print(f"{tab}Cookies: {client.cookies}")
 				print(f"{tab}Your health: {client.hp}/{client.maxHP}")
+			#Enemies attack
+			for enemy in enemyList:
+				#Hostile enemies attack
+				if enemy.behavior == "Hostile":
+					time.sleep(0.25)
+					enemy.fight()
+					#Game ends when player is dead
+					if client.hp == 0:
+						break
 
 #Game Loop Definition
 def gameLoop():
