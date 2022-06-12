@@ -18,5 +18,3 @@ Future updates will include:
 ## Credits
 
 Alex Akoopie - Creator
-
-Zhiwen Zhen - Playtester
