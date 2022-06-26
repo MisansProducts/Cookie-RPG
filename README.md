@@ -1,6 +1,6 @@
 # Cookie RPG
 
-A small text adventure video game with RPG elements. Slay enemies and collect cookies to satiate your hunger.
+A small text-adventure video game with RPG elements. Slay enemies and collect cookies to satiate your hunger.
 
 This game includes:
 * Leveling system
